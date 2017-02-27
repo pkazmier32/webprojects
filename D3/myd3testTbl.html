@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test 2</title>
+        <script type="text/javascript" src="libs/d3v4/d3.js"></script>
+		<script type="text/javascript" src="libs/jquery/jquery-3.1.1.js"></script>
+		<link href="libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <style>
+    </style>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div id="tblpayments">
+            </div>
+        </div>
+        <script  type="text/javascript">
+            var dateParse = d3.timeParse("%b %Y");
+            var ccmp;
+            var elemCnt=0;
+            var ttl=0;
+			var columns = ['Column A', 'Column B'];
+            			
+			var tbl = d3.select("#tblpayments").append("table").attr("class", "table table-striped");
+			var thead = tbl.append("thead");
+			var tbody = tbl.append("tbody");
+			
+			thead.append('tr').selectAll('th').data(columns).enter().append('th').text(function (column) {return column});
+			
+            d3.json("/data/ccpmtinfo.json", function(error, ccmp) {
+			  
+			  ccmp.forEach(function(d) {
+				d.Date = dateParse(d.Date);
+				d.MinPayment = +d.MinPayment;
+				d.Balance = +d.Balance;
+				d.Account = d.Account;
+				d.rawDate = d.Date;
+			  });
+			  //console.log(ccmp);
+              
+                
+              var dataGroup = d3.nest().key(function(d) {
+					return d.Date;
+				}).entries(ccmp);
+                
+                dataGroup.forEach(function(d, i) {
+                    elemCnt++;
+                    d3.select('#out').text("Elements:" + elemCnt);
+                    //console.log(d3.values(d));
+                   
+                    d3.values(d).forEach(function(d, i) {
+                        if (i == 1) {
+							
+							var mp = d3.sum(d3.values(d), function(d) { return d.MinPayment;});
+							console.log(d);
+							
+							//d3.values(d).forEach(function(e, j) {
+							//	console.log(e.Account);
+							//});
+                            //console.log(mp);
+							var rows = tbody.selectAll('tr').data(d).enter().append('tr');
+							var cells = rows.selectAll('td').data(function (row){
+								return columns.map(function (column) {
+									return {column: column, value: row[column]};
+								});
+							}).enter().append('td').text(d3.sum(d3.values(d), function(d) { return d.MinPayment;}));
+                        }
+                    });
+                    
+                    
+                });
+                
+            });
+            
+        </script>
+    </body>
+</html>
+    

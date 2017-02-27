@@ -1,0 +1,51 @@
+[
+  {
+    "Region": "Essence",
+    "StarSystem": "Atlulle",
+    "Planet": "Atlulle 5",
+    "Moons": [
+      {
+        "Moon": 1,
+        "POS": "",
+        "Minerals": [
+          "Nothing"
+        ]
+      }
+    ]
+  },
+  {
+    "Region": "Essence",
+    "StarSystem": "Atlulle",
+    "Planet": "Atlulle 4",
+    "Moons": [
+      {
+        "Moon": 1,
+        "POS": "",
+        "Minerals": [
+          "Nothing"
+        ]
+      }
+    ]
+  },
+  {
+    "Region": "Essence",
+    "StarSystem": "Atlulle",
+    "Planet": "Atlulle 7",
+    "Moons": [
+      {
+        "Moon": 1,
+        "POS": "",
+        "Minerals": [
+          "Nothing"
+        ]
+      },
+      {
+        "Moon": 2,
+        "POS": "",
+        "Minerals": [
+          "Nothing"
+        ]
+      }
+    ]
+  }
+]

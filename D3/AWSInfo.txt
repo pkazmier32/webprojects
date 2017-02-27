@@ -1,0 +1,2 @@
+palancarmedia.net.s3-website-us-east-1.amazonaws.com
+palancarmedia.net.s3-website-us-east-1.amazonaws.com/D3/myd3test.html

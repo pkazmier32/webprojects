@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+<div class="container">
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+<button ng-click="getMoonData()" class="btn-success btn-sm">Display Moon Data</button>
+<h2>The moon information is:</h2>
+
+<p>{{moonInfo}}</p>
+<p>{{errorInfo}}</p>
+<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+</div>
+</div>
+
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+    $scope.getMoonData = function() {
+		$http.get("data/EOMoonData.json")
+		.then(function(response) {
+			//First function handles success
+			$scope.moonInfo = response.data;
+		}, function(response) {
+			//Second function handles error
+			$scope.errorInfo = "Something went wrong";
+		});
+	}
+});
+
+</script>
+
+</body>
+</html>

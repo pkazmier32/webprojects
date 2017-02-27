@@ -1,0 +1,76 @@
+*** Download DynamoDB and AWS CLI ***
+*** DynamoDB
+-> http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning
+*** AWS CLI Python 
+1.  Install python 3.x
+2.  Install AWS CLI -> http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.CLI.html#Tools.CLI.DownloadingAndRunning
+
+
+**** To set the path to Python scripts ****
+set PATH=%PATH%;%USERPROFILE%\AppData\Roaming\Python\scripts
+
+**** Connect to local DynamoDb and list tables *****
+*** May need to run aws configure first ****
+-> aws configure
+-- AWS Access Key ID [None]: fakeMyKeyId
+-- AWS Secret Access Key [None]: fakeSecretAccessKey
+-- Default region name [us-west-2]:
+-- Default output format [None]:
+
+*** Start Dynamo Db ***
+java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+
+** -sharedDb — DynamoDB will use a single database file, instead of using separate files for each credential and region. 
+If you specify -sharedDb, all DynamoDB clients will interact with the same set of tables regardless of their region and 
+credential configuration.
+
+
+aws dynamodb list-tables  --endpoint-url http://localhost:8000
+
+**** Create table using AWS CLI ****
+* Generate JSON skeleton file *
+-> aws dynamodb create-table --generate-cli-skeleton > createtable.json
+Create the table
+-> aws dynamodb create-table --cli-input-json file://create_EOMoonData.json --endpoint-url http://localhost:8000
+   aws dynamodb create-table --cli-input-json file://create_ImageInfo.json --endpoint-url http://localhost:8000
+   
+* For the ImageInfo table, the image name was used as a unique key/identifier and the subject name for the range
+* LSI must use the same attribute name as the primary key but can specify a second sort field.  This sort field must
+* be included in the table attribute definitions
+   
+   
+*** Add a GSI to a table ***
+* a file that contains a list of attributes must be included
+aws dynamodb update-table --table-name ImageInfo --attribute-definitions file://create_ImageInfoGroup_Gsi_Attrs.json --global-secondary-index-updates file://create_ImageInfoGroup_Gsi.json --endpoint-url http://localhost:8000
+aws dynamodb update-table --table-name ImageInfo --attribute-definitions file://create_ImageInfoSubjectName_Gsi_Attrs.json --global-secondary-index-updates file://create_ImageInfoSubjectName_Gsi.json --endpoint-url http://localhost:8000
+
+*** WIth the local DynamoDb it may be necessary to create the table without a Global Seconday Index and then add the GSI after the table is created
+*** since the table creation throws an error if there are more AttributeDefinition fields than KeyFields
+aws dynamodb update-table --table-name EOMoonData --attribute-definitions file://create_EOMoonData_Gsi_Attr.json --global-secondary-index-updates file://create_EOMoonData_Gsi.json --endpoint-url http://localhost:8000
+aws dynamodb update-table --table-name ImageInfo --attribute-definitions file://create_ImageInfo.json  --endpoint-url http://localhost:8000
+
+*** Delete a table ***
+aws dynamodb delete-table --table-name EOMoonData --endpoint-url http://localhost:8000
+aws dynamodb delete-table --table-name ImageInfo --endpoint-url http://localhost:8000
+
+*** Delete an item
+* Seems like you have to use a file with the key info.  The file must include the HASH and RANGE fields
+aws dynamodb delete-item --table-name ImageInfo --key file://deleteitem.json --endpoint-url http://localhost:8000
+
+*** Describe a table ***
+aws dynamodb describe-table --table-name EOMoonData --endpoint-url http://localhost:8000
+
+*** To insert data ***
+aws dynamodb batch-write-item --request-items file://EOMoonDataItems.json --endpoint-url http://localhost:8000
+aws dynamodb batch-write-item --request-items file://ImageInfoInsertItem_xxx.json --endpoint-url http://localhost:8000
+
+
+*** Scan a table ***
+-> aws dynamodb scan --table-name EOMoonData --endpoint-url http://localhost:8000
+   aws dynamodb scan --table-name ImageInfo --endpoint-url http://localhost:8000
+   aws dynamodb scan --table-name ImageInfo --index-name SubjectNameGSI --filter-expression "SubjectName = :a" --expression-attribute-values file://subjectnamescanattrs.json --endpoint-url http://localhost:8000
+   
+*** Query a table ***
+--projection-expression == fields to be returned.  if omitted, all fields are returned
+aws dynamodb query --table-name ImageInfo --index-name SubjectNameIdx --key-condition-expression "SubjectName = :v1" --expression-attribute-values file://SubjectNameAttrs.json --endpoint-url http://localhost:8000
+aws dynamodb query --table-name ImageInfo --index-name GroupNameGSI --key-condition-expression "GroupName = :v1" --expression-attribute-values file://GroupNameAttrs.json --endpoint-url http://localhost:8000

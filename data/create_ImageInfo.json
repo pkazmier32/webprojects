@@ -1,0 +1,21 @@
+{	
+	"AttributeDefinitions": [
+		{"AttributeName":"ImageName","AttributeType": "S"},
+		{"AttributeName":"InsertDate", "AttributeType":"S"}
+    ],
+	"TableName":"ImageInfo",
+    "KeySchema": [
+        {
+            "AttributeName": "ImageName",
+            "KeyType": "HASH"
+        },
+		{
+			"AttributeName":"InsertDate",
+			"KeyType":"RANGE"
+		}
+    ],
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 2,
+        "WriteCapacityUnits": 2
+    }
+}

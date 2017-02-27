@@ -1,0 +1,111 @@
+{
+    "ImageInfo": [
+        {
+            "PutRequest": {
+                "Item":{
+					"SubjectName": {"S":"Candice B"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"CandiceB_FJ_JustMe_1"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/CandiceB_FJ_JustMe_1.JPG"},
+					"CollectionName": {"S":"Just Me"},
+					"Tags": {"S":"Bikini,Boat"},
+					"Notes": {"S":"Stripped Bikini"},
+					"Hair":{"S":"Blonde"},
+					"GroupName":{"S":"Bikini"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+                }
+            }
+        },
+		{
+            "PutRequest": {
+                "Item":{
+					"SubjectName": {"S":"Candice B"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"CandiceB_FJ_JustMe_2"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/CandiceB_FJ_JustMe_2.JPG"},
+					"CollectionName": {"S":"Just Me"},
+					"Tags": {"S":"Bikini,Boat"},
+					"Hair":{"S":"Blonde"},
+					"GroupName":{"S":"Bikini"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+                }
+            }
+        },
+		{
+			"PutRequest": {
+				"Item":{
+					"SubjectName": {"S":"Carisha"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"Carisha_FJ_FeelsGood_1"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/Carisha_FJ_FeelsGood_1.JPG"},
+					"CollectionName": {"S":"Feels Good"},
+					"Hair":{"S":"Blonde"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+				}
+			}
+		},
+		{
+			"PutRequest": {
+				"Item":{
+					"SubjectName": {"S":"Carisha"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"Carisha_FJ_FeelsGood_2"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/Carisha_FJ_FeelsGood_2.JPG"},
+					"CollectionName": {"S":"Feels Good"},
+					"Tags": {"S":"Athletic"},
+					"Hair":{"S":"Blonde"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+				}
+			}
+		},
+		{
+			"PutRequest": {
+				"Item":{
+					"SubjectName": {"S":"Erin K"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"ErinK_FJ_ForYou_1"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/ErinK_FJ_ForYou_1.JPG"},
+					"CollectionName": {"S":"For You"},
+					"Tags": {"S":"Red Lingerie"},
+					"Hair":{"S":"Blonde"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+				}
+			}
+		},
+		{
+			"PutRequest": {
+				"Item":{
+					"SubjectName": {"S":"Ashley"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"Ashley_FJ_Floating_1"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/Ashley_FJ_Floating_1.JPG"},
+					"CollectionName": {"S":"Floating"},
+					"Tags": {"S":"Hips"},
+					"Hair":{"S":"Brunette"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+				}
+			}
+		},
+		{
+			"PutRequest": {
+				"Item":{
+					"SubjectName": {"S":"Ashley"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"Ashley_FJ_Floating_2"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/grph16/Ashley_FJ_Floating_2.JPG"},
+					"CollectionName": {"S":"Floating"},
+					"Tags": {"S":"Hips"},
+					"Hair":{"S":"Brunette"},
+					"InsertDate":{"S":"2017-02-10"},
+					"Source":{"S":"FemJoy"}
+				}
+			}
+		}
+    ]   
+}

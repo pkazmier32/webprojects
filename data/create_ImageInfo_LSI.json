@@ -1,0 +1,16 @@
+[{
+    "Create": {
+        "IndexName": "ImageGroup_Gsi",
+        "KeySchema": [{
+            "AttributeName": "ImageGroup",
+            "KeyType": "HASH"
+        }],
+        "Projection": {
+            "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+        }
+    }
+}]

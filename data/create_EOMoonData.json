@@ -1,0 +1,17 @@
+{
+    "AttributeDefinitions": [
+		{"AttributeName": "Moon","AttributeType": "S"}
+    ],
+    "TableName": "EOMoonData",
+    "KeySchema": [
+        {
+            "AttributeName": "Moon",
+            "KeyType": "HASH"
+        }
+    ],
+    
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+    }
+}

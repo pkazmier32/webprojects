@@ -1,0 +1,10 @@
+/**
+ Export to JSON plugin for PHPMyAdmin
+ @version 0.1
+ */
+
+// Database 'pkazmier_pagesread'
+
+// pkazmier_pagesread.categories
+
+[{"cat_id":"3","parent_cat":"0","cat_name":"Programming"}, {"cat_id":"4","parent_cat":"3","cat_name":"C++"}, {"cat_id":"5","parent_cat":"3","cat_name":"Java"}, {"cat_id":"6","parent_cat":"0","cat_name":"Recreation"}, {"cat_id":"7","parent_cat":"6","cat_name":"Scuba Diving"}, {"cat_id":"8","parent_cat":"0","cat_name":"Arts & Sciences"}, {"cat_id":"9","parent_cat":"1","cat_name":"Personal Finance"}, {"cat_id":"10","parent_cat":"3","cat_name":"XML"}, {"cat_id":"11","parent_cat":"3","cat_name":"Windows Programming"}, {"cat_id":"12","parent_cat":"8","cat_name":"Aviation & Space"}, {"cat_id":"13","parent_cat":"0","cat_name":"Technology"}, {"cat_id":"14","parent_cat":"13","cat_name":"Computers"}, {"cat_id":"15","parent_cat":"14","cat_name":"Operating Systems"}, {"cat_id":"16","parent_cat":"15","cat_name":"Linux"}, {"cat_id":"17","parent_cat":"6","cat_name":"Triathlon Training"}, {"cat_id":"18","parent_cat":"3","cat_name":".NET Programming"}, {"cat_id":"19","parent_cat":"13","cat_name":"CRM Technology"}, {"cat_id":"20","parent_cat":"3","cat_name":"Database Programming"}, {"cat_id":"21","parent_cat":"3","cat_name":"Web Services"}, {"cat_id":"22","parent_cat":"3","cat_name":"Android Programming"}, {"cat_id":"23","parent_cat":"3","cat_name":"Web Development"}, {"cat_id":"24","parent_cat":"0","cat_name":"Homebrewing"}, {"cat_id":"1","parent_cat":"0","cat_name":"Business"}, {"cat_id":"2","parent_cat":"0","cat_name":"News"}]

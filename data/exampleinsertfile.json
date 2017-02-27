@@ -1,0 +1,17 @@
+{
+    "RequestItems": {
+        "KeyName": [
+            {
+                "PutRequest": {
+                    "Item": {
+                        "KeyName": {
+                            "S": ""
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "ReturnConsumedCapacity": "",
+    "ReturnItemCollectionMetrics": ""
+}

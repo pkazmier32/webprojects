@@ -1,0 +1,16 @@
+[{
+    "Create": {
+        "IndexName": "GroupNameGSI",
+        "KeySchema": [{
+            "AttributeName": "GroupName",
+            "KeyType": "HASH"
+        }],
+        "Projection": {
+            "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+        }
+    }
+}]

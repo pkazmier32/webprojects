@@ -1,0 +1,14 @@
+angular.callbacks._0([
+{"Region":"Essence","StarSystem":"Atlulle","Planet":"Atlulle VIII","Moon":"Atlulle VIII 5","POS":"My Gallente Large","MoonMineral":"Evaporite Deposits","Status":"","Owned By":"Palancar Industries"},
+{"Region":"Essence","StarSystem":"Atlulle","Planet":"Atlulle VII","Moon":"Atlulle VIII 1","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Atlulle","Planet":"Atlulle VII","Moon":"Atlulle VIII 2","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Atlulle","Planet":"Atlulle IV","Moon":"Atlulle IV 1","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Atlulle","Planet":"Atlulle V","Moon":"Atlulle V 1","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan IX","Moon":"Isenan IX 6","POS":"My Gallente Small","MoonMineral":"Titanium","Status":"Online","Owned By":"Palancar Industries"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan IX","Moon":"Isenan IX 6","POS":"My Gallente Small","MoonMineral":"Silicates","Status":"Online","Owned By":"Palancar Industries"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan VII","Moon":"Isenan VII 1","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan VII","Moon":"Isenan VII 2","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan VIII","Moon":"Isenan VII 1","POS":"None","MoonMineral":"Nothing"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan X","Moon":"Isenan X 1","POS":"Unknown","MoonMineral":"Nothing","Status":"Online","Owned By":"Unknown"},
+{"Region":"Essence","StarSystem":"Isenan","Planet":"Isenan X","Moon":"Isenan X 2","POS":"Unknown","MoonMineral":"Titanium","Status":"Offline","Owned By":"Unknown"}
+]);

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<style>
+	.carouselButtons {
+		margin-left: 100px;
+		position: absolute;
+		bottom: 0px;
+	}
+	.myimgs {
+		width:1300px;
+		height:600px;
+	}
+	
+	.myimgs_noheight {
+		width:1300px;
+	}
+	
+	.myimgs2 {
+		width:1200px;
+		height:600px;
+	}
+	
+	#myImageCarousel {
+		left:25px;
+		padding-bottom:5px;
+	}
+	
+	.rotate270 {
+		-webkit-transform: rotate(270deg);
+		-moz-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		transform: rotate(270deg);
+	}
+	
+	.rotate90 {
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+	
+	.rotate180 {
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		transform: rotate(180deg);
+	}
+</style>
+<body>
+<div ng-app = "myApp" ng-controller="getImageInfoCtrl">
+<center>
+<div id="myImageCarousel" class="carousel slide" data-ride="carousel" >
+  <div class="carousel-inner" role="listbox" >
+    
+	<!--
+	<div class="carousel-item active">
+      <img class="d-block img-fluid myimgs" src="https://s3.amazonaws.com/PKazPhotoBackup/CaribCruiseJan2017/DSC_0002.JPG" alt="First slide">
+	  <div class="carousel-caption d-none d-md-block">
+		<h3>M/S Riviera</h3>
+		<p>View from our balcony</p>
+	  </div>
+    </div> -->
+	
+    <div class="carousel-item" ng-repeat="image in imageInfo" ng-class="{active:$first}">
+      <img class="{{image.ImageClasses}}" src="{{image.ImageUrl}}" alt="First slide">
+	  <div class="carousel-caption d-none d-md-block">
+		<h3>{{image.Location}}</h3>
+		<p>{{image.Description}}</p>
+	  </div>
+    </div>
+  
+	
+    </div>
+  </div>
+
+  <a class="carousel-control-prev" href="#myImageCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myImageCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+	  
+  <div id="carouselButtons">
+      <button id="playButton" type="button" class="btn btn-default">
+          <i class="fa fa-play" aria-hidden="true"></i>
+       </button>
+      <button id="pauseButton" type="button" class="btn btn-default">
+          <i class="fa fa-pause" aria-hidden="true"></i>
+      </button>
+	   
+  </div>
+  <br>
+  <input type="button" class="btn btn-info" value="Back to Galleries" onclick="location.href = 'ImageGalleries.html';">
+</div>
+</center>
+<!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script>
+	
+	var url = 'http://www.palancarmedia.net/data/2017CaribCruiseCaptions.json';
+	//url = 'http://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero';
+	var app=angular.module('myApp', [])
+		.controller('getImageInfoCtrl', function($scope, $http) {
+			
+			$scope.imageInfo=[];
+			
+			$http.jsonp(url+'?callback=JSON_CALLBACK')
+				.success(function(data) {
+					$scope.imageInfo = data;
+					console.log(data);
+				})
+				.error(function(data) {
+					console.log(data);
+				})
+		});
+      
+	$(function () {
+    $('.carousel').carousel({
+	  interval: 6000
+	})
+    $('#playButton').click(function () {
+        $('#myImageCarousel').carousel('cycle');
+    });
+    $('#pauseButton').click(function () {
+        $('#myImageCarousel').carousel('pause');
+    });
+});
+</script>
+</div>
+</body>
+</html>

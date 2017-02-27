@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test 2</title>
+        <script type="text/javascript" src="libs/d3v4/d3.js"></script>
+		<script type="text/javascript" src="libs/jquery/jquery-3.1.1.js"></script>
+		<link href="libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <style>
+    </style>
+    <body>
+        <div class="container">
+            <div class="row">
+			<span id="result"/>
+				<div class="jumbotron">
+					<svg id="visualisation" width="1800" height="750"></svg>
+				</div>
+			</div>
+		</div>
+        </div>
+        <script  type="text/javascript">
+            var dateParse = d3.timeParse("%b %Y");
+            var ccmp;
+            var elemCnt=0;
+            var ttl=0;
+			
+			// Set the ranges
+			var x = d3.scaleTime().range([0, width]);  
+			var y = d3.scaleLinear().range([height, 0]);
+			var dateParse = d3.timeParse("%b %Y");
+			
+			// Set the dimensions of the canvas / graph
+			var margin = {top: 30, right: 20, bottom: 70, left: 50},
+				width = 1000 - margin.left - margin.right,
+				height = 600 - margin.top - margin.bottom;
+			
+			var svg = d3.select("#visualisation")
+				.append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", 
+					  "translate(" + margin.left + "," + margin.top + ")");
+					  
+			var lineGen = d3.line()
+				.x(function(d) {return x(d.key);})
+				.y(function(d) {return y(d.value.Total);});
+			
+						
+            d3.json("/data/ccpmtinfo.json", function(error, ccmp) {
+			  
+			  ccmp.forEach(function(d) {
+				d.Date = dateParse(d.Date);
+				d.MinPayment = +d.MinPayment;
+				d.Balance = +d.Balance;
+				d.Account = d.Account;
+			  });
+			  //console.log(ccmp);
+              
+              var dataGroup = d3.nest()
+				.key(function(d) {return d.Date;})
+				.rollup(function(d) {return {Total:d3.sum(d, function(g) { return +g.MinPayment;})}})
+				.entries(ccmp);
+				
+			  x.domain(d3.extent(dataGroup, function(d) { return d.key; }));
+			  y.domain([0, d3.max(3000)]);
+				
+			dataGroup.forEach(function(d, i) {
+				console.log(d.key);
+				console.log(d.value.Total);
+				
+				svg.selectAll("dot")
+					  .data(dataGroup)
+					.enter().append("circle")
+					  .attr("r", 2)
+					  .style("stroke", 'blue')
+					  .style("fill", "black")
+					  .attr("cx", function(d) { return x(d.key); })
+					  .attr("cy", function(d) { return y(d.value.Total); });  
+															
+					svg.append("path")
+						.attr("class", "line")
+						.style("fill", "none")
+						.style("stroke", 'blue')
+						.attr('d', lineGen(d));
+			});
+                				
+				/*
+				// Add the X Axis
+				svg.append("g")
+					  .attr("class", "axis")
+					  .attr("transform", "translate(0," + height + ")")
+					  .call(d3.axisBottom(x).ticks(5).tickFormat(d3.timeFormat("%b %Y")))
+					  .selectAll("text")
+						.style("text-anchor", "end")
+						.attr("dx", "-.8em")
+						.attr("dy", ".15em")
+						.attr("transform", "rotate(-65)");
+				
+				 // Add the Y Axis
+			  svg.append("g")
+				  .attr("class", "axis")
+				  .call(d3.axisLeft(y));
+				  
+			  // add the Y gridlines
+			  svg.append("g")			
+				  .attr("class", "grid")
+				  .call(d3.axisLeft(y).ticks(10)
+					  .tickSize(-width)
+					  .tickFormat("")
+				  ) 
+                 */
+            }); 
+            
+        </script>
+    </body>
+</html>
+    

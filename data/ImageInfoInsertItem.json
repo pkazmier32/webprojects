@@ -1,0 +1,17 @@
+{
+    "ImageInfo": [
+        {
+            "PutRequest": {
+                "Item":{
+					"SubjectName": {"S":"Castries, St. Lucia"},
+					"ImageRating": {"N":"0"},
+					"ImageName":{"S":"DSC_0002"},
+					"ImageURL":{"S":"https://s3.amazonaws.com/PKazPhotoBackup/CaribCruiseJan2017/DSC_0128.JPG"},
+					"CollectionName": {"S":"Around Castries"},
+					"Tag": {"S":"Local Market"},
+					"Description": {"S":"Front of the market"}
+                }
+            }
+        }
+    ]   
+}

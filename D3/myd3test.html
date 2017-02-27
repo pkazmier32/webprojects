@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="-1">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="libs/jquery/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="libs/d3v4/d3.js"></script>
+		<link href="libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+	<style> /* set the CSS */
+
+		body { font: 12px Arial;}
+
+		path { 
+			stroke: steelblue;
+			stroke-width: 1;
+			fill: none;
+		}
+
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: grey;
+			stroke-width: 1;
+			shape-rendering: crispEdges;
+		}
+
+		.legend rect {
+		  fill:white;
+		  stroke:black;
+		  opacity:0.8;}
+		  
+		  .grid line {
+			  stroke: grey;
+			  stroke-opacity: 0.7;
+			  shape-rendering: crispEdges;
+			}
+
+			.grid path {
+			  stroke-width: 0;
+			}
+
+</style>
+    <body>
+	<br>
+		<div class="container">
+		<div class="row">
+			<input type="file" id="userFile"/>
+		</div>
+		<br>
+		<div class="row">
+			<span id="result"/>
+				<div class="jumbotron">
+					<svg id="visualisation" width="1800" height="750"></svg>
+				</div>
+				
+			</div>
+		</div>
+				
+        <script type="text/javascript">
+			var ccmp;
+			const input = document.getElementById('userFile');
+			const reader = new FileReader();
+			var colors = ['blue', 'green', 'red','purple', 'orange', 'cyan', 'lime'];
+			
+			// Set the dimensions of the canvas / graph
+			var margin = {top: 30, right: 20, bottom: 70, left: 50},
+				width = 1000 - margin.left - margin.right,
+				height = 600 - margin.top - margin.bottom;
+				
+			// Set the ranges
+			var x = d3.scaleTime().range([0, width]);  
+			var y = d3.scaleLinear().range([height, 0]);
+			var dateParse = d3.timeParse("%b %Y");
+						
+			// Adds the svg canvas
+			var svg = d3.select("#visualisation")
+				.append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", 
+					  "translate(" + margin.left + "," + margin.top + ")");
+					 
+			var lineGen = d3.line()
+				.x(function(d) {return x(d.Date);})
+				.y(function(d) {return y(d.MinPayment);});
+			
+			var file;
+			input.onchange = function() {
+			  file = input.files[0];
+			  reader.readAsText(file);
+			};
+
+			reader.onload = function() {
+			  
+			  jsn = JSON.parse(reader.result);
+			  //console.log(ccmp);
+			}
+			
+			d3.json("data/ccpmtinfo.json", function(error, ccmp) {
+			   
+			  ccmp.forEach(function(d) {
+				d.Date = dateParse(d.Date);
+				d.MinPayment = +d.MinPayment;
+				d.Balance = +d.Balance;
+				d.Account = d.Account;
+			  });
+			  //console.log(ccmp);
+			  
+			  // Scale the range of the data
+			  x.domain(d3.extent(ccmp, function(d) { return d.Date; }));
+			  y.domain([0, d3.max(ccmp, function(d) { return d.MinPayment; })]);
+			  
+			  var dataGroup = d3.nest().key(function(d) {
+					return d.Account;
+				}).entries(ccmp);
+								
+				legendSpace = width/dataGroup.length; // spacing for the legend
+			
+				dataGroup.forEach(function(d, i) {
+					console.log(d.values);
+					
+					// Add the line graph
+				  svg.selectAll("dot")
+					  .data(ccmp)
+					.enter().append("circle")
+					  .attr("r", 2)
+					  .style("stroke", colors[i])
+					  .style("fill", "black")
+					  .attr("cx", function(d) { return x(d.Date); })
+					  .attr("cy", function(d) { return y(d.MinPayment); });
+															
+					svg.append("path")
+						.attr("class", "line")
+						.style("fill", "none")
+						.style("stroke", colors[i])
+						.attr('d', lineGen(d.values));
+					
+					// Add the Legend
+					svg.append("text")
+						.attr("x", (legendSpace/2)+i*legendSpace)  // space legend
+						.attr("y", height + (margin.bottom/2)+ 30)
+						.attr("class", "legend")    // style the legend
+						.style("fill", colors[i])
+						.text(d.key);
+				});
+				
+				
+				// Add the X Axis
+				  svg.append("g")
+					  .attr("class", "axis")
+					  .attr("transform", "translate(0," + height + ")")
+					  .call(d3.axisBottom(x).ticks(5).tickFormat(d3.timeFormat("%b %Y")))
+					  .selectAll("text")
+						.style("text-anchor", "end")
+						.attr("dx", "-.8em")
+						.attr("dy", ".15em")
+						.attr("transform", "rotate(-65)");
+				
+				 // Add the Y Axis
+			  svg.append("g")
+				  .attr("class", "axis")
+				  .call(d3.axisLeft(y));
+				  
+			  // add the Y gridlines
+			  svg.append("g")			
+				  .attr("class", "grid")
+				  .call(d3.axisLeft(y).ticks(10)
+					  .tickSize(-width)
+					  .tickFormat("")
+				  )
+				  				
+			});
+			  
+			
+
+			 	
+			  
+				
+				
+        </script>
+		
+    </body>
+</html>   

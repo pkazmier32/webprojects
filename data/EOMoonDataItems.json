@@ -1,0 +1,16 @@
+{
+    "EOMoonData": [
+        {
+            "PutRequest": {
+                "Item":{
+					"Region": {"S":"Essence"},
+					"StarSystem": {"S":"Atlulle"},
+					"Planet":{"S":"Atlulle 4"},
+					"Moon": {"S":"Atlulle 4 I"},
+					"POS": {"S":"None"},
+					"Mineral": {"S":"None"}
+                }
+            }
+        }
+    ]   
+}

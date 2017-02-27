@@ -1,0 +1,16 @@
+[{
+    "Create": {
+        "IndexName": "Minerals_Gsi",
+        "KeySchema": [{
+            "AttributeName": "Mineral",
+            "KeyType": "HASH"
+        }],
+        "Projection": {
+            "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+        }
+    }
+}]
